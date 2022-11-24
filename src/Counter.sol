@@ -1,14 +1,17 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
+import "solmate/tokens/ERC721.sol";
+contract NFT is ERC721 {
+    uint256 public currentTokenId;
 
-contract Counter {
-    uint256 public number;
+    constructor(
+        string memory _name,
+        string memory _symbol
+    ) ERC721(_name, _symbol) {}
 
-    function setNumber(uint256 newNumber) public {
-        number = newNumber;
-    }
 
-    function increment() public {
-        number++;
+
+    function tokenURI(uint256 id) public view virtual override returns (string memory) {
+        return "Hey";
     }
 }
