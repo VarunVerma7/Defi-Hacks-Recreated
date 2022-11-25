@@ -8,17 +8,16 @@ contract StaxLPStakingExploitTest is Test {
     StaxLPStaking public stax;
     StaxLPExploiter public staxExploitContract;
 
-
     // setup function runs before tests begin
-    function setUp() public { 
-        // The address of the deployed StaxLPStaking contract       
+    function setUp() public {
+        // The address of the deployed StaxLPStaking contract
         stax = StaxLPStaking(0xd2869042E12a3506100af1D192b5b04D65137941);
 
         // the malicious contract we want to deploy
         staxExploitContract = new StaxLPExploiter();
     }
 
-    // anything prefixed with test will start with the 
+    // anything prefixed with test will start with the
     function testExecuteHack() public {
         // VM cheat code that sets address to 3
         vm.startPrank(address(3));
