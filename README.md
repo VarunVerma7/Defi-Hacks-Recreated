@@ -23,6 +23,4 @@ since we want to run the test called `testStaxExecuteHack` and for lesson 2 do
 
 `forge test -vvv --fork-url $MY_RPC_URL --match ^testVisr`
 
-since we want to run the test `testVis`
-
-etc.
+since we want to run the test `testVisr`
