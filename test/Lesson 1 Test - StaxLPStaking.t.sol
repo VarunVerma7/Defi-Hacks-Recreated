@@ -18,7 +18,7 @@ contract StaxLPStakingExploitTest is Test {
     }
 
     // anything prefixed with test will start with the
-    function testExecuteHack() public {
+    function testStaxExecuteHack() public {
         // VM cheat code that sets address to 3
         vm.startPrank(address(3));
         console.log("Balance before execution: ", stax.balanceOf(address(3)));
