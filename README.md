@@ -19,8 +19,10 @@ Use `--match` flag to run a specific test, so for example, lesson 1 do
 
 `forge test -vvv --fork-url $MY_RPC_URL --match ^testStax`
 
-and for lesson 2 do
+since we want to run the test called `testStaxExecuteHack` and for lesson 2 do
 
 `forge test -vvv --fork-url $MY_RPC_URL --match ^testVisr`
+
+since we want to run the test `testVis`
 
 etc.
