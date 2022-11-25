@@ -15,10 +15,12 @@ And set the https rpc url as an environment variable via:
 export MY_RPC_URL=https:://eth-mainnet.g.alchemy.com/v2/(YOUR_API_KEY_HERE)
 ```
 
+Use --match flag to run a specific test, so for example, lesson 1 do 
 
-### Lesson 1
+`forge test -vvv --fork-url $MY_RPC_URL --match ^testStax`
 
-Run Command: `forge test -vvv --fork-url $MY_RPC_URL --fork-block-number 15725067 --match ^testStax`
-### Lesson 2
+and for lesson 2 do
 
-Run Command: `forge test -vvv --fork-url $MY_RPC_URL --fork-block-number 13848982 --match ^testVisr`
+`forge test -vvv --fork-url $MY_RPC_URL --match ^testVisr`
+
+etc.
