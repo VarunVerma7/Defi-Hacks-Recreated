@@ -5,7 +5,7 @@ import "forge-std/Test.sol";
 import "../src/Lesson 2 - visr.sol";
 import "openzeppelin-contracts/token/ERC20/IERC20.sol";
 
-contract visrExploitTest is Test {
+contract VisrExploitTest is Test {
     VisrInterface public visrContract;
     VisrExploiter public visrExploitContract;
     UniswapV2Interface public uniswapContract;
