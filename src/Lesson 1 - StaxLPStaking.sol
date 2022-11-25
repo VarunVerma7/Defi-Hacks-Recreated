@@ -48,7 +48,6 @@ interface StaxLPStaking {
     function withdrawAll(bool claim) external;
 }
 
-contract Hackor {
-    constructor() {}
+contract StaxLPExploiter {
     function migrateWithdraw(address oldStaking, uint256 amount) public {}
 }
