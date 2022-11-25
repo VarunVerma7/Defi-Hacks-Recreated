@@ -10,6 +10,9 @@ contract StaxLPStakingExploitTest is Test {
 
     // setup function runs before tests begin
     function setUp() public {
+        // change to the point in time of the exploit
+        vm.rollFork(15725067);
+
         // The address of the deployed StaxLPStaking contract
         stax = StaxLPStaking(0xd2869042E12a3506100af1D192b5b04D65137941);
 

