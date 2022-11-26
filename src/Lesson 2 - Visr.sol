@@ -202,8 +202,9 @@ contract VisrExploiter {
         return address(0x7);
     }
     // function gets called as well by the visor, doesn't need to do anything, just exist so txn doesn't revert
+
     function delegatedTransferERC20(address, address, uint256) public {}
 
-     // our contract needs to be able to receive ETH
+    // our contract needs to be able to receive ETH
     receive() external payable {}
 }

@@ -51,8 +51,8 @@ contract VisrExploitTest is Test {
         // Execute Swap
         uint256[] memory amounts =
             uniswapContract.swapExactTokensForETH(visrToken.balanceOf(address(0x7)), 0, path, address(0x7), 2650097619);
-        uint visrTokensTraded = amounts[0] / 1e18;
-        uint ethTokensReceived = amounts[1] / 1e18;
+        uint256 visrTokensTraded = amounts[0] / 1e18;
+        uint256 ethTokensReceived = amounts[1] / 1e18;
         console.log("Visr amount traded:", visrTokensTraded, "for value of ETH:", ethTokensReceived);
     }
 }
