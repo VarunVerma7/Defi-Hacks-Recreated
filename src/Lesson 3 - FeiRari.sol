@@ -201,3 +201,8 @@ interface WethInterface {
     event Deposit(address indexed dst, uint256 wad);
     event Withdrawal(address indexed src, uint256 wad);
 }
+
+interface fUSDInterface {
+    function borrow(uint borrowAmount) external returns (uint);
+    function exitMarket(address cTokenAddress) external returns (uint);    
+}
