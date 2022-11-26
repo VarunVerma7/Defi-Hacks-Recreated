@@ -34,7 +34,7 @@ contract VisrExploitTest is Test {
         vm.startPrank(address(0x7));
     }
 
-    // anything prefixed with test will start with the
+    // anything prefixed with test will start with the --match ^testVisr
     function testVisr() public {
         // Deposit setting the from contract to the malicious hacker contract
         console.log("ETH BALANCE BEFORE HACK: ", address(0x7).balance);
